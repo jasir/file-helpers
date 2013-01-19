@@ -1,0 +1,17 @@
+{
+	 "name": "jasir/file-helpers",
+	 "description": "Filesystem utilities library",
+	 "authors": [
+		  {
+				"name": "Jaroslav Povolný",
+				"email": "jaroslav.povolny@gmail.com"
+		  }
+	 ],
+	 "license": "MIT",
+	 "autoload": {
+		"psr-0": {"jasir\\FileHelpers": "lib/"}
+	 },
+	 "require-dev": {
+		  "phpunit/phpunit": "3.7.9"
+	 }
+}

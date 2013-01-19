@@ -1,0 +1,57 @@
+{
+    "hash": "e8bf1e2460b3c7e92bb16f7b1762e848",
+    "packages": [
+        {
+            "name": "lstrojny/functional-php",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "git://github.com/lstrojny/functional-php.git",
+                "reference": "4bb7fac0d065a637b300e7dbb38d929bf6bc02c4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/lstrojny/functional-php/archive/4bb7fac0d065a637b300e7dbb38d929bf6bc02c4.zip",
+                "reference": "4bb7fac0d065a637b300e7dbb38d929bf6bc02c4",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "time": "2013-01-19 14:40:05",
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/Functional/_import.php"
+                ]
+            },
+            "notification-url": "http://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Lars Strojny",
+                    "email": "lstrojny@php.net",
+                    "homepage": "http://usrportage.de"
+                },
+                {
+                    "name": "Max Beutel",
+                    "email": "nash12@gmail.com"
+                }
+            ],
+            "description": "Functional primitives for PHP",
+            "keywords": [
+                "functional"
+            ]
+        }
+    ],
+    "packages-dev": null,
+    "aliases": [
+
+    ],
+    "minimum-stability": "stable",
+    "stability-flags": {
+        "lstrojny/functional-php": 20
+    }
+}
