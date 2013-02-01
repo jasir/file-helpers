@@ -2,9 +2,9 @@
 namespace jasir\FileHelpers;
 
 require_once __DIR__ . '/../vendor/autoload.php';
-require_once __DIR__ . '/../lib/FileHelpers.php';
+require_once __DIR__ . '/../lib/File.php';
 
-class FileHelpersTest extends \PHPUnit_Framework_TestCase {
+class FileTest extends \PHPUnit_Framework_TestCase {
 
 	private $file;
 
@@ -20,13 +20,13 @@ class FileHelpersTest extends \PHPUnit_Framework_TestCase {
 
 	function testReadLastLines() {
 		$this->createFile(1000);
-		$lines = FileHelpers::readLastLines($this->file, 2);
+		$lines = File::readLastLines($this->file, 2);
 		$this->assertEquals(array("999\n", "1000\n"), $lines);
 	}
 
 	function testReadLastLines_no_lines_result() {
 		$this->createFile(10);
-		$lines = FileHelpers::readLastLines($this->file, 0);
+		$lines = File::readLastLines($this->file, 0);
 		$this->assertEquals(array(), $lines);
 	}
 
@@ -37,7 +37,7 @@ class FileHelpersTest extends \PHPUnit_Framework_TestCase {
 		for ($i = 1; $i <= 50; $i++) {
 			$l = fgets($fh);
 		}
-		$position = FileHelpers::seekLineBack($fh, 5);
+		$position = File::seekLineBack($fh, 5);
 		$this->assertEquals(126, $position);
 		$line = fgets($fh);
 		$this->assertEquals("46\n", $line);

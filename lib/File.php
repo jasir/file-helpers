@@ -2,7 +2,7 @@
 
 	namespace jasir\FileHelpers;
 
-	class FileHelpers {
+	class File {
 
 		/**
 		 * Return array with last n lines from given file
