@@ -2,7 +2,6 @@
 namespace jasir\FileHelpers;
 
 require_once __DIR__ . '/../vendor/autoload.php';
-require_once __DIR__ . '/../lib/Directory.php';
 
 class DirectoryTest extends \PHPUnit_Framework_TestCase {
 
