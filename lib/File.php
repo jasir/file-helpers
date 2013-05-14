@@ -101,4 +101,9 @@ class File {
 		return $pos;
 	}
 
+	static function normalizeSlashes($path) {
+		return str_replace('\\', '/', $path);
+	}
+
+
 }
