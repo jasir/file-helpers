@@ -13,6 +13,9 @@ class File {
 	public static function readLastLines($file, $lines) {
 
 		if (is_string($file)) {
+			if (!file_exists($file)) {
+				return FALSE;
+			}
 			$fh = fopen($file, "r");
 			if ($fh === FALSE) {
 				return FALSE;
