@@ -86,9 +86,9 @@ class FileTest extends \PHPUnit_Framework_TestCase {
 	}
 
 
-	public function testGetAbsolutePath()
+	public function testSimplifyPath()
 	{
-		$this->assertEquals("this/a/test/is", File::getAbsolute('this/is/../a/./test/.///is'));
+		$this->assertEquals("this/a/test/is", File::simplifyPath('this/is/../a/./test/.///is'));
 	}
 
 

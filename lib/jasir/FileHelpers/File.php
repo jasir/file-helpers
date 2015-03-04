@@ -118,8 +118,8 @@ class File {
 	public static function getRelative($path, $compareTo)
 	{
 		//absolutize and unixize paths
-		$path = self::getAbsolute($path);
-		$compareTo = self::getAbsolute($compareTo);
+		$path = self::simplifyPath($path);
+		$compareTo = self::simplifyPath($compareTo);
 
 		// clean paths by removing trailing and prefixing slashes
 		$path = trim($path, '/');
@@ -157,7 +157,7 @@ class File {
 	 * @param string $path
 	 * @return string
 	 */
-	public static function getAbsolute($path)
+	public static function simplifyPath($path)
 	{
 		  $path = self::unixisePath($path);
 		  $parts = array_filter(explode('/', $path), 'strlen');
