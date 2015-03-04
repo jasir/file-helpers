@@ -109,30 +109,30 @@ class File {
 
 
 	/**
-	 * Converts path to be relative to given $compareTo path
+	 * Converts path to be relative to given $relativeTo path
 	 *
 	 * @param string $path
-	 * @param string $compareTo
+	 * @param string $relativeTo
 	 * @return string
 	 */
-	public static function getRelative($path, $compareTo)
+	public static function getRelative($path, $relativeTo)
 	{
 		//absolutize and unixize paths
 		$path = self::simplifyPath($path);
-		$compareTo = self::simplifyPath($compareTo);
+		$relativeTo = self::simplifyPath($relativeTo);
 
 		// clean paths by removing trailing and prefixing slashes
 		$path = trim($path, '/');
-		$compareTo = trim($compareTo, '/');
+		$relativeTo = trim($relativeTo, '/');
 
 		// simple case: $compareTo is in $path
-		if (strpos($path, $compareTo) === 0) {
-			return substr($path, strlen($compareTo) + 1);
+		if (strpos($path, $relativeTo) === 0) {
+			return substr($path, strlen($relativeTo) + 1);
 		}
 
 		$relative       = array();
 		$pathParts      = explode('/', $path);
-		$compareToParts = explode('/', $compareTo);
+		$compareToParts = explode('/', $relativeTo);
 
 		foreach ($compareToParts as $index => $part) {
 			if (isset($pathParts[$index]) && $pathParts[$index] == $part) {
