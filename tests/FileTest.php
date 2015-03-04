@@ -106,4 +106,10 @@ class FileTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $expected, $result );
 	}
 
+	public function testNormalizePath()
+	{
+		$this->assertEquals("aaa/b/c", File::normalizePath('aaa/xxx/../b/c'));
+	}
+
+
 }

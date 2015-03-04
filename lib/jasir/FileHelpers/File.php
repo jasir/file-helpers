@@ -2,6 +2,8 @@
 
 namespace jasir\FileHelpers;
 
+use InvalidArgumentException;
+
 class File {
 
 	/**
@@ -107,6 +109,22 @@ class File {
 		return $pos;
 	}
 
+	/**
+	 * Saves content to file, autocreates path to file
+	 *
+	 * @param mixed $path
+	 * @param mixed $content
+	 */
+	public static function saveFile($path, $content)
+	{
+		$path = self::normalizePath($path);
+		$dir = dirname($path);
+		if (!file_exists($dir)) {
+			mkdir($dir, 0777, true);
+		}
+		file_put_contents($path, $content);
+	}
+
 
 	/**
 	 * Converts path to be relative to given $relativeTo path
@@ -173,7 +191,43 @@ class File {
 				}
 		  }
 		  return implode('/', $absolutes);
-	 }
+	}
+
+
+	/**
+	 * Normalize path
+	 *
+	 * @param   string  $path
+	 * @param   string  $separator
+	 * @return  string  normalized path
+	 * @throws  InvalidArgumentException
+	 */
+	public static function normalizePath($path, $separator = '/')
+	{
+		// Remove any kind of funky unicode whitespace
+		$normalized = preg_replace('#\p{C}+|^\./#u', '', $path);
+
+		// Path remove self referring paths ("/./").
+		$normalized = preg_replace('#/\.(?=/)|^\./|\./$#', '', $normalized);
+
+		// Regex for resolving relative paths
+		$regex = '#\/*[^/\.]+/\.\.#Uu';
+
+		while (preg_match($regex, $normalized)) {
+			$normalized = preg_replace($regex, '', $normalized);
+		}
+
+		if (preg_match('#/\.{2}|\.{2}/#', $normalized)) {
+			throw new InvalidArgumentException('Path is outside of the defined root, path: [' . $path . '], resolved: [' . $normalized . ']');
+		}
+
+		if ($separator !== '/') {
+			$normalized = str_replace("/", "\\", $normalized);
+		}
+
+
+		return trim($normalized, $separator);
+	}
 
 
 	static function normalizeSlashes($path)
