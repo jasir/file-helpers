@@ -69,59 +69,20 @@ class FileTest extends \PHPUnit_Framework_TestCase {
 
 	public static function getRelativePathProvider()
 	{
-		return array(
-			array(
-				'/srv/foo/bar',
-				'/srv',
-				'foo/bar',
-			),
-			array(
-				'/srv/foo/bar',
-				'/srv/',
-				'foo/bar',
-			),
-			array(
-				'/srv/foo/bar/',
-				'/srv',
-				'foo/bar',
-			),
-			array(
-				'/srv/foo/bar/',
-				'/srv/',
-				'foo/bar',
-			),
-			array(
-				'/srv/foo/bar',
-				'/srv/test',
-				'../foo/bar',
-			),
-			array(
-				'/srv/foo/bar',
-				'/srv/test/fool',
-				'../../foo/bar',
-			),
-			array(
-				'/srv/mad/xp/mad/model/static/css/uni-form.css',
-				'/srv/mad/xp/liria/',
-				'../mad/model/static/css/uni-form.css',
-			),
-			array(
-				'c:/work/here',
-				'c:/work/from',
-				'../here',
-			),
-			array(
-				'c:\work\here',
-				'c:\work\from',
-				'../here',
-			),
-			array(
-				'/here',
-				'/homes/jasir',
-				'../../here',
-			),
+		//  [path, relativeto, expectedRelativePath]
 
-		);
+		return [
+			['/srv/foo/bar', '/srv', 'foo/bar'],
+			['/srv/foo/bar', '/srv/', 'foo/bar'],
+			['/srv/foo/bar/', '/srv', 'foo/bar'],
+			['/srv/foo/bar/', '/srv/', 'foo/bar'],
+			['/srv/foo/bar', '/srv/test', '../foo/bar'],
+			['/srv/foo/bar', '/srv/test/fool', '../../foo/bar'],
+			['/srv/mad/xp/mad/model/static/css/uni-form.css', '/srv/mad/xp/liria/', '../mad/model/static/css/uni-form.css'],
+			['c:/work/here', 'c:/work/from', '../here'],
+			['c:\work\here', 'c:\work\from', '../here'],
+			['/here', '/homes/jasir', '../../here'],
+		];
 	}
 
 
