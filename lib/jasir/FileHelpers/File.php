@@ -10,7 +10,8 @@ class File {
 	 * @param int $lines
 	 * @return array
 	 */
-	public static function readLastLines($file, $lines) {
+	public static function readLastLines($file, $lines)
+	{
 
 		if (is_string($file)) {
 			if (!file_exists($file)) {
@@ -40,6 +41,7 @@ class File {
 		return $lines;
 	}
 
+
 	/**
 	 * Will set pointer in file back to read n lines relative to current pointer
 	 *
@@ -48,7 +50,8 @@ class File {
 	 * @return int
 	 * @see http://stackoverflow.com/questions/2961618/how-to-read-only-5-last-line-of-the-txt-file
 	 */
-	public static function seekLineBack($fh, $n) {
+	public static function seekLineBack($fh, $n)
+	{
 
 		$readSize = 160 * ($n + 1);
 		$pos = ftell($fh);
@@ -104,10 +107,6 @@ class File {
 		return $pos;
 	}
 
-	static function normalizeSlashes($path) {
-		return str_replace('\\', '/', $path);
-	}
-
 
 	/**
 	 * Converts path to be relative to given $compareTo path
@@ -151,6 +150,7 @@ class File {
 		return implode('/', $relative);
 	}
 
+
 	/**
 	 * Converts path to be absolute
 	 *
@@ -175,14 +175,21 @@ class File {
 		  return implode('/', $absolutes);
 	 }
 
+
+	static function normalizeSlashes($path)
+	{
+		return str_replace('\\', '/', $path);
+	}
+
+
 	 /**
 	  * Converts file path to unix standards
 	  * @param string $path
 	  */
-	 public static function unixisePath($path)
-	 {
+	public static function unixisePath($path)
+	{
 		return str_replace(array(':', '\\'), array('', '/'), $path);
-	 }
+	}
 
 
 

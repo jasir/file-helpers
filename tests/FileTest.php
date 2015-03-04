@@ -7,29 +7,39 @@ class FileTest extends \PHPUnit_Framework_TestCase {
 
 	private $file;
 
-	public function setUp() {
+
+	public function setUp()
+	{
 		$this->file = __DIR__ . '/testfile.txt';
 	}
 
-	public function tearDown() {
+
+	public function tearDown()
+	{
 		if(file_exists($this->file)) {
 			unlink($this->file);
 		}
 	}
 
-	function testReadLastLines() {
+
+	function testReadLastLines()
+	{
 		$this->createFile(1000);
 		$lines = File::readLastLines($this->file, 2);
 		$this->assertEquals(array("999\n", "1000\n"), $lines);
 	}
 
-	function testReadLastLines_no_lines_result() {
+
+	function testReadLastLines_no_lines_result()
+	{
 		$this->createFile(10);
 		$lines = File::readLastLines($this->file, 0);
 		$this->assertEquals(array(), $lines);
 	}
 
-	function testSeekLineBack() {
+
+	function testSeekLineBack()
+	{
 		$this->createFile(100);
 
 		$fh = fopen($this->file, 'r');
@@ -43,7 +53,9 @@ class FileTest extends \PHPUnit_Framework_TestCase {
 		fclose($fh);
 	}
 
-	private function createFile($n) {
+
+	private function createFile($n)
+	{
 		if(file_exists($this->file)) {
 			unlink($this->file);
 		}
@@ -53,6 +65,7 @@ class FileTest extends \PHPUnit_Framework_TestCase {
 		}
 		fclose($fh);
 	}
+
 
 	public static function getRelativePathProvider()
 	{
@@ -95,6 +108,18 @@ class FileTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
+
+	public function testGetAbsolutePath()
+	{
+		$this->assertEquals("this/a/test/is", File::getAbsolute('this/is/../a/./test/.///is'));
+	}
+
+
+	public function testUnixisePath()
+	{
+		$this->assertEquals("c/work/shit", File::unixisePath('c:/work\\shit'));
+	}
+
 	/**
 	 * @dataProvider getRelativePathProvider
 	 */
@@ -103,16 +128,5 @@ class FileTest extends \PHPUnit_Framework_TestCase {
 		$result = File::getRelative( $path, $compareTo );
 		$this->assertEquals( $expected, $result );
 	}
-
-	public function testGetAbsolutePath()
-	{
-		$this->assertEquals("this/a/test/is", File::getAbsolute('this/is/../a/./test/.///is'));
-	}
-
-	public function testUnixisePath()
-	{
-		$this->assertEquals("c/work/shit", File::unixisePath('c:/work\\shit'));
-	}
-
 
 }
