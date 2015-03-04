@@ -105,6 +105,22 @@ class FileTest extends \PHPUnit_Framework_TestCase {
 				'/srv/mad/xp/liria/',
 				'../mad/model/static/css/uni-form.css',
 			),
+			array(
+				'c:/work/here',
+				'c:/work/from',
+				'../here',
+			),
+			array(
+				'c:\work\here',
+				'c:\work\from',
+				'../here',
+			),
+			array(
+				'/here',
+				'/homes/jasir',
+				'../../here',
+			),
+
 		);
 	}
 
