@@ -109,4 +109,81 @@ class File {
 	}
 
 
+	/**
+	 * Converts path to be relative to given $compareTo path
+	 *
+	 * @param string $path
+	 * @param string $compareTo
+	 * @return string
+	 */
+	public static function getRelative($path, $compareTo)
+	{
+		//absolutize and unixize paths
+		$path = self::getAbsolute($path);
+		$compareTo = self::getAbsolute($compareTo);
+
+		// clean paths by removing trailing and prefixing slashes
+		$path = trim($path, '/');
+		$compareTo = trim($compareTo, '/');
+
+		// simple case: $compareTo is in $path
+		if (strpos($path, $compareTo) === 0) {
+			return substr($path, strlen($compareTo) + 1);
+		}
+
+		$relative       = array();
+		$pathParts      = explode('/', $path);
+		$compareToParts = explode('/', $compareTo);
+
+		foreach ($compareToParts as $index => $part) {
+			if (isset($pathParts[$index]) && $pathParts[$index] == $part) {
+				continue;
+			}
+			$relative[] = '..';
+		}
+
+		foreach ($pathParts as $index => $part) {
+			if (isset($compareToParts[$index]) && $compareToParts[$index] == $part) {
+				continue;
+			}
+			$relative[] = $part;
+		}
+		return implode('/', $relative);
+	}
+
+	/**
+	 * Converts path to be absolute
+	 *
+	 * @param string $path
+	 * @return string
+	 */
+	public static function getAbsolute($path)
+	{
+		  $path = self::unixisePath($path);
+		  $parts = array_filter(explode('/', $path), 'strlen');
+		  $absolutes = array();
+		  foreach ($parts as $part) {
+				if ('.' == $part) {
+					continue;
+				}
+				if ('..' == $part) {
+					 array_pop($absolutes);
+				} else {
+					 $absolutes[] = $part;
+				}
+		  }
+		  return implode('/', $absolutes);
+	 }
+
+	 /**
+	  * Converts file path to unix standards
+	  * @param string $path
+	  */
+	 public static function unixisePath($path)
+	 {
+		return str_replace(array(':', '\\'), array('', '/'), $path);
+	 }
+
+
+
 }

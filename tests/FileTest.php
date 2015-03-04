@@ -53,4 +53,66 @@ class FileTest extends \PHPUnit_Framework_TestCase {
 		}
 		fclose($fh);
 	}
+
+	public static function getRelativePathProvider()
+	{
+		return array(
+			array(
+				'/srv/foo/bar',
+				'/srv',
+				'foo/bar',
+			),
+			array(
+				'/srv/foo/bar',
+				'/srv/',
+				'foo/bar',
+			),
+			array(
+				'/srv/foo/bar/',
+				'/srv',
+				'foo/bar',
+			),
+			array(
+				'/srv/foo/bar/',
+				'/srv/',
+				'foo/bar',
+			),
+			array(
+				'/srv/foo/bar',
+				'/srv/test',
+				'../foo/bar',
+			),
+			array(
+				'/srv/foo/bar',
+				'/srv/test/fool',
+				'../../foo/bar',
+			),
+			array(
+				'/srv/mad/xp/mad/model/static/css/uni-form.css',
+				'/srv/mad/xp/liria/',
+				'../mad/model/static/css/uni-form.css',
+			),
+		);
+	}
+
+	/**
+	 * @dataProvider getRelativePathProvider
+	 */
+	public function testGetRelativePath($path, $compareTo, $expected)
+	{
+		$result = File::getRelative( $path, $compareTo );
+		$this->assertEquals( $expected, $result );
+	}
+
+	public function testGetAbsolutePath()
+	{
+		$this->assertEquals("this/a/test/is", File::getAbsolute('this/is/../a/./test/.///is'));
+	}
+
+	public function testUnixisePath()
+	{
+		$this->assertEquals("c/work/shit", File::unixisePath('c:/work\\shit'));
+	}
+
+
 }
