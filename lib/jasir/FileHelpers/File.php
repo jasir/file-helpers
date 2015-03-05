@@ -190,7 +190,11 @@ class File {
 					 $absolutes[] = $part;
 				}
 		  }
-		  return implode('/', $absolutes);
+		  $simplified = implode('/', $absolutes);
+		  if (substr($path, 0, 1) === '/') {
+			  $simplified = '/' . $simplified;
+		  }
+		  return $simplified;
 	}
 
 
