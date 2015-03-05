@@ -177,7 +177,7 @@ class File {
 	 */
 	public static function simplifyPath($path)
 	{
-		  $path = self::unixisePath($path);
+		  $path = self::normalizeSlashes($path);
 		  $parts = array_filter(explode('/', $path), 'strlen');
 		  $absolutes = array();
 		  foreach ($parts as $part) {
