@@ -236,6 +236,13 @@ class File {
 	}
 
 
+	static function normalizeWindows($path)
+	{
+		return str_replace('/', '\\', $path);
+	}
+
+
+
 	 /**
 	  * Converts file path to unix standards
 	  * @param string $path
