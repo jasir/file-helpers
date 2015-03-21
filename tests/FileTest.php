@@ -96,11 +96,6 @@ class FileTest extends \PHPUnit_Framework_TestCase {
 	}
 
 
-	public function testUnixisePath()
-	{
-		$this->assertEquals("c/work/shit", File::unixisePath('c:/work\\shit'));
-	}
-
 	/**
 	 * @dataProvider getRelativePathProvider
 	 */

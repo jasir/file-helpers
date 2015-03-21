@@ -12,7 +12,7 @@ class Directory {
 	 */
 
 	static function deleteRecursive($directory, $deleteDir = TRUE) {
-		$directory = File::normalizeSlashes($directory);
+		$directory = str_replace('\\', '/', $directory);
 		if (substr($directory, -1) == '/') {
 			$directory = substr($directory, 0, -1);
 		}

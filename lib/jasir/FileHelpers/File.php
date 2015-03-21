@@ -109,6 +109,7 @@ class File {
 		return $pos;
 	}
 
+
 	/**
 	 * Saves content to file, autocreates path to file
 	 *
@@ -135,7 +136,6 @@ class File {
 	 */
 	public static function getRelative($path, $relativeTo)
 	{
-		//absolutize and unixize paths
 		$path = self::simplifyPath($path);
 		$relativeTo = self::simplifyPath($relativeTo);
 
@@ -202,11 +202,14 @@ class File {
 
 	/**
 	 * Normalize path
+	 * Removes .. and . from path
 	 *
 	 * @param   string  $path
 	 * @param   string  $separator
 	 * @return  string  normalized path
 	 * @throws  InvalidArgumentException
+	 *
+	 * @deprecated
 	 */
 	public static function normalizePath($path, $separator = '/')
 	{
@@ -232,32 +235,8 @@ class File {
 		}
 
 
-		return trim($normalized, $separator);
+		return rtrim($normalized, $separator);
 	}
-
-
-	static function normalizeSlashes($path)
-	{
-		return str_replace('\\', '/', $path);
-	}
-
-
-	static function normalizeWindows($path)
-	{
-		return str_replace('/', '\\', $path);
-	}
-
-
-
-	 /**
-	  * Converts file path to unix standards
-	  * @param string $path
-	  */
-	public static function unixisePath($path)
-	{
-		return str_replace(array(':', '\\'), array('', '/'), $path);
-	}
-
 
 
 }
