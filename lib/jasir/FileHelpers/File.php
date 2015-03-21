@@ -170,14 +170,13 @@ class File {
 
 
 	/**
-	 * Converts path to be absolute
-	 *
+	 * Removes .. and . from path
 	 * @param string $path
 	 * @return string
 	 */
 	public static function simplifyPath($path)
 	{
-		  $path = self::normalizeSlashes($path);
+		  $path = str_replace('\\', '/', $path);
 		  $parts = array_filter(explode('/', $path), 'strlen');
 		  $absolutes = array();
 		  foreach ($parts as $part) {
@@ -185,9 +184,12 @@ class File {
 					continue;
 				}
 				if ('..' == $part) {
-					 array_pop($absolutes);
+					if(count($absolutes) === 0) {
+						return $path;
+					}
+					array_pop($absolutes);
 				} else {
-					 $absolutes[] = $part;
+					$absolutes[] = $part;
 				}
 		  }
 		  $simplified = implode('/', $absolutes);

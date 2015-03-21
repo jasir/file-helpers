@@ -91,6 +91,8 @@ class FileTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals("this/a/test/is", File::simplifyPath('this/is/../a/./test/.///is'));
 		$this->assertEquals("/this/a/test/is", File::simplifyPath('/this/is/../a/./test/.///is'));
 		$this->assertEquals('C:/Work/projects/adminlte-cutter/output/indexes/index2.html/logo.latte', File::simplifyPath('C:\Work\projects\adminlte-cutter\app\presenters/../../output\indexes\index2.html/logo.latte'));
+		$this->assertEquals("aaa/b/c", File::simplifyPath('aaa/xxx/../b/c'));
+		$this->assertEquals("aaa/xxx/../../../", File::simplifyPath('aaa/xxx/../../../'));
 	}
 
 
